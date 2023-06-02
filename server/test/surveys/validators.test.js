@@ -1,5 +1,5 @@
 const survey = require("../../db/survey");
-const { validateSurveyResponses } = require("../../utils/surveys/validators");
+const { isValidSurveyResponses } = require("../../utils/surveys/validators");
 
 describe("Survey Screen Validators", () => {
   const surveyQuestions = survey.content.sections[0].questions;
@@ -41,7 +41,7 @@ describe("Survey Screen Validators", () => {
       },
     ];
     expect(
-      validateSurveyResponses(responses, surveyQuestions, surveyAnswers)
+      isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
     ).toBe(true);
   });
   test("should return false", () => {
@@ -80,7 +80,7 @@ describe("Survey Screen Validators", () => {
       },
     ];
     expect(
-      validateSurveyResponses(responses, surveyQuestions, surveyAnswers)
+      isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
     ).toBe(false);
   });
 
@@ -119,14 +119,14 @@ describe("Survey Screen Validators", () => {
       },
     ];
     expect(
-      validateSurveyResponses(responses, surveyQuestions, surveyAnswers)
+      isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
     ).toBe(false);
   });
 
   test("should return false", () => {
     responses = [];
     expect(
-      validateSurveyResponses(responses, surveyQuestions, surveyAnswers)
+      isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
     ).toBe(false);
   });
 });

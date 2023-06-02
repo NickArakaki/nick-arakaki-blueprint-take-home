@@ -1,4 +1,4 @@
-const validateSurveyResponses = (responses, surveyQuestions, surveyAnswers) => {
+const isValidSurveyResponses = (responses, surveyQuestions, surveyAnswers) => {
   /**
    * input: an array of user responses
    * output: boolean indicating if all user responses are valid
@@ -19,4 +19,4 @@ const validateSurveyResponses = (responses, surveyQuestions, surveyAnswers) => {
   return true;
 };
 
-module.exports = { validateSurveyResponses };
+module.exports = { isValidSurveyResponses };
