@@ -26,4 +26,22 @@ const processSurveyResponses = (responses) => {
   return domainValues;
 };
 
-module.exports = { processSurveyResponses };
+const processDomainValues = (domainValues) => {
+  /**
+   * input: object, key = domain, value = int
+   * output: array of level-2 assessments
+   */
+
+  const res = new Set();
+  const assessments = levelTwoAssessments;
+
+  for (const [domain, value] of Object.entries(domainValues)) {
+    if (value >= 2) {
+      res.add(assessments[domain]);
+    }
+  }
+
+  return Array.from(res);
+};
+
+module.exports = { processSurveyResponses, processDomainValues };

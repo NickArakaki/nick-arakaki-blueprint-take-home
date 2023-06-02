@@ -1,4 +1,7 @@
-const { processSurveyResponses } = require("../../utils/surveys/process");
+const {
+  processSurveyResponses,
+  processDomainValues,
+} = require("../../utils/surveys/process");
 
 describe("Process Surver Responses", () => {
   test("should equal { depression: 0, mania: 0, anxiety: 0, substance_use: 0 }", () => {
@@ -129,5 +132,29 @@ describe("Process Surver Responses", () => {
       anxiety: 3,
       substance_use: 0,
     });
+  });
+});
+
+describe("Process Domain Values", () => {
+  test("should return ['PHQ-9', 'ASRM', 'ASSIST']", () => {
+    expect(
+      processValues({ depression: 2, mania: 4, anxiety: 3, substance_use: 3 })
+    ).toEqual(["PHQ-9", "ASRM", "ASSIST"]);
+  });
+
+  test("should return tests ['PHQ-9']", () => {
+    expect(processValues({ depression: 2, mania: 0, anxiety: 3 })).toEqual([
+      "PHQ-9",
+    ]);
+  });
+
+  test("should return []", () => {
+    expect(
+      processValues({ depression: 0, mania: 0, anxiety: 0, substance_use: 0 })
+    ).toEqual([]);
+  });
+
+  test("should return []", () => {
+    expect(processValues({})).toEqual([]);
   });
 });
