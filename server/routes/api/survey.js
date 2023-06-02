@@ -1,13 +1,16 @@
 const router = require("express").Router();
 const survey = require("../../db/survey");
-const { validateSurvey } = require("../../utils/surveys/middleware");
+const {
+  validateSurvey,
+  processSurvey,
+} = require("../../utils/surveys/middleware");
 
 router.get("/", (_req, res) => {
-  res.json(survey);
+  return res.json(survey);
 });
 
-router.post("/", validateSurvey, (req, res) => {
-  res.json({ message: "hello from survery post route" });
+router.post("/", validateSurvey, processSurvey, (req, res) => {
+  return res.json(req.results);
 });
 
 module.exports = router;
