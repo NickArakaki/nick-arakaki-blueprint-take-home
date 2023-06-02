@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const survey = require("../../db/survey");
 
-router.get("/", (req, res) => {
-  console.log(survey);
+router.get("/", (_req, res) => {
   res.json(survey);
 });
 
