@@ -1,4 +1,5 @@
 const { isValidSurveyResponses } = require("./validators");
+const { processSurveyResponses, processDomainValues } = require("./process");
 const survey = require("../../db/survey");
 
 const validateSurvey = (req, res, next) => {
@@ -17,6 +18,16 @@ const validateSurvey = (req, res, next) => {
   }
 };
 
+const processSurvey = (req, _res, next) => {
+  const responses = req.body.answers;
+  const domainValues = processSurveyResponses(responses);
+  const assessments = processDomainValues(domainValues);
+  req.results = assessments;
+
+  return next();
+};
+
 module.exports = {
   validateSurvey,
+  processSurvey,
 };

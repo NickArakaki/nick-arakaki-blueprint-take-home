@@ -138,23 +138,155 @@ describe("Process Surver Responses", () => {
 describe("Process Domain Values", () => {
   test("should return ['PHQ-9', 'ASRM', 'ASSIST']", () => {
     expect(
-      processValues({ depression: 2, mania: 4, anxiety: 3, substance_use: 3 })
+      processDomainValues({
+        depression: 2,
+        mania: 4,
+        anxiety: 3,
+        substance_use: 3,
+      })
     ).toEqual(["PHQ-9", "ASRM", "ASSIST"]);
   });
 
   test("should return tests ['PHQ-9']", () => {
-    expect(processValues({ depression: 2, mania: 0, anxiety: 3 })).toEqual([
-      "PHQ-9",
-    ]);
+    expect(
+      processDomainValues({ depression: 2, mania: 0, anxiety: 3 })
+    ).toEqual(["PHQ-9"]);
   });
 
   test("should return []", () => {
     expect(
-      processValues({ depression: 0, mania: 0, anxiety: 0, substance_use: 0 })
+      processDomainValues({
+        depression: 0,
+        mania: 0,
+        anxiety: 0,
+        substance_use: 0,
+      })
     ).toEqual([]);
   });
 
   test("should return []", () => {
-    expect(processValues({})).toEqual([]);
+    expect(processDomainValues({})).toEqual([]);
+  });
+});
+
+describe("Integration of Process Requests with Process Domain Values", () => {
+  test("should equal []", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 0 },
+      { question_id: "question_b", value: 0 },
+      { question_id: "question_c", value: 0 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 0 },
+      { question_id: "question_f", value: 0 },
+      { question_id: "question_g", value: 0 },
+      { question_id: "question_h", value: 0 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual([]);
+  });
+
+  test("should equal ['PHQ-9', 'ASRM', 'ASSIST']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 4 },
+      { question_id: "question_b", value: 4 },
+      { question_id: "question_c", value: 4 },
+      { question_id: "question_d", value: 4 },
+      { question_id: "question_e", value: 4 },
+      { question_id: "question_f", value: 4 },
+      { question_id: "question_g", value: 4 },
+      { question_id: "question_h", value: 4 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual([
+      "PHQ-9",
+      "ASRM",
+      "ASSIST",
+    ]);
+  });
+
+  test("should equal ['PHQ-9', 'ASRM', 'ASSIST']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 1 },
+      { question_id: "question_b", value: 2 },
+      { question_id: "question_c", value: 3 },
+      { question_id: "question_d", value: 4 },
+      { question_id: "question_e", value: 1 },
+      { question_id: "question_f", value: 2 },
+      { question_id: "question_g", value: 3 },
+      { question_id: "question_h", value: 4 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual([
+      "PHQ-9",
+      "ASRM",
+      "ASSIST",
+    ]);
+  });
+
+  test("should equal ['ASSIST']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 0 },
+      { question_id: "question_b", value: 0 },
+      { question_id: "question_c", value: 0 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 0 },
+      { question_id: "question_f", value: 0 },
+      { question_id: "question_g", value: 0 },
+      { question_id: "question_h", value: 4 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["ASSIST"]);
+  });
+
+  test("should equal ['PHQ-9']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 1 },
+      { question_id: "question_b", value: 1 },
+      { question_id: "question_c", value: 0 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 0 },
+      { question_id: "question_f", value: 0 },
+      { question_id: "question_g", value: 0 },
+      { question_id: "question_h", value: 0 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["PHQ-9"]);
+  });
+
+  test("should equal ['ASRM'", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 0 },
+      { question_id: "question_b", value: 0 },
+      { question_id: "question_c", value: 1 },
+      { question_id: "question_d", value: 1 },
+      { question_id: "question_e", value: 0 },
+      { question_id: "question_f", value: 0 },
+      { question_id: "question_g", value: 0 },
+      { question_id: "question_h", value: 0 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["ASRM"]);
+  });
+
+  test("should equal ['PHQ-9']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 0 },
+      { question_id: "question_b", value: 0 },
+      { question_id: "question_c", value: 0 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 1 },
+      { question_id: "question_f", value: 1 },
+      { question_id: "question_g", value: 1 },
+      { question_id: "question_h", value: 0 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["PHQ-9"]);
+  });
+
+  test("should equal ['PHQ-9']", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 1 },
+      { question_id: "question_b", value: 1 },
+      { question_id: "question_c", value: 0 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 1 },
+      { question_id: "question_f", value: 1 },
+      { question_id: "question_g", value: 1 },
+      { question_id: "question_h", value: 0 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["PHQ-9"]);
   });
 });
