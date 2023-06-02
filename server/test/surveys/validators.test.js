@@ -7,38 +7,14 @@ describe("Survey Screen Validators", () => {
 
   test("should return true", () => {
     responses = [
-      {
-        value: 1,
-        question_id: "question_a",
-      },
-      {
-        value: 0,
-        question_id: "question_b",
-      },
-      {
-        value: 2,
-        question_id: "question_c",
-      },
-      {
-        value: 3,
-        question_id: "question_d",
-      },
-      {
-        value: 1,
-        question_id: "question_e",
-      },
-      {
-        value: 0,
-        question_id: "question_f",
-      },
-      {
-        value: 1,
-        question_id: "question_g",
-      },
-      {
-        value: 0,
-        question_id: "question_h",
-      },
+      { value: 1, question_id: "question_a" },
+      { value: 0, question_id: "question_b" },
+      { value: 2, question_id: "question_c" },
+      { value: 3, question_id: "question_d" },
+      { value: 1, question_id: "question_e" },
+      { value: 0, question_id: "question_f" },
+      { value: 1, question_id: "question_g" },
+      { value: 0, question_id: "question_h" },
     ];
     expect(
       isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
@@ -46,38 +22,14 @@ describe("Survey Screen Validators", () => {
   });
   test("should return false", () => {
     responses = [
-      {
-        value: -1,
-        question_id: "question_a",
-      },
-      {
-        value: 0,
-        question_id: "question_b",
-      },
-      {
-        value: 2,
-        question_id: "question_c",
-      },
-      {
-        value: 3,
-        question_id: "question_d",
-      },
-      {
-        value: 1,
-        question_id: "question_e",
-      },
-      {
-        value: 0,
-        question_id: "question_f",
-      },
-      {
-        value: 1,
-        question_id: "question_g",
-      },
-      {
-        value: 0,
-        question_id: "question_h",
-      },
+      { value: -1, question_id: "question_a" },
+      { value: 0, question_id: "question_b" },
+      { value: 2, question_id: "question_c" },
+      { value: 3, question_id: "question_d" },
+      { value: 1, question_id: "question_e" },
+      { value: 0, question_id: "question_f" },
+      { value: 1, question_id: "question_g" },
+      { value: 0, question_id: "question_h" },
     ];
     expect(
       isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
@@ -86,37 +38,14 @@ describe("Survey Screen Validators", () => {
 
   test("should return false", () => {
     responses = [
-      {
-        question_id: "question_a",
-      },
-      {
-        value: 0,
-        question_id: "question_b",
-      },
-      {
-        value: 2,
-        question_id: "question_c",
-      },
-      {
-        value: 3,
-        question_id: "question_d",
-      },
-      {
-        value: 1,
-        question_id: "question_e",
-      },
-      {
-        value: 0,
-        question_id: "question_f",
-      },
-      {
-        value: 1,
-        question_id: "question_g",
-      },
-      {
-        value: 0,
-        question_id: "question_h",
-      },
+      { question_id: "question_a" },
+      { value: 0, question_id: "question_b" },
+      { value: 2, question_id: "question_c" },
+      { value: 3, question_id: "question_d" },
+      { value: 1, question_id: "question_e" },
+      { value: 0, question_id: "question_f" },
+      { value: 1, question_id: "question_g" },
+      { value: 0, question_id: "question_h" },
     ];
     expect(
       isValidSurveyResponses(responses, surveyQuestions, surveyAnswers)
