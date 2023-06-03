@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Loading from "../Loading";
+import DisplayErrors from "../DisplayErrors";
 import "./DiagnosticScreener.css";
 
 export default function DiagnosticScreener() {
@@ -10,11 +11,18 @@ export default function DiagnosticScreener() {
   const [surveyDisplayName, setSurveyDisplayName] = useState("");
   const [surveyFullName, setSurveyFullName] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [errors, setErrors] = useState([]);
   const [userResponses, setUserResponses] = useState([{}]);
 
   useEffect(() => {
     fetch("/api/survey/")
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Something went wrong, please try again later");
+        }
+      })
       .then((data) => {
         setSurveyDisplayName(data.content.display_name);
         setSurveyFullName(data.full_name);
@@ -23,10 +31,25 @@ export default function DiagnosticScreener() {
         setQuestions(data.content.sections[0].questions);
         setIsLoaded(true);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setErrors([err.message]);
+        setIsLoaded(true);
+      });
   }, []);
 
+  const handleClick = (e) => {
+    if (currentQuestion < questions.length) {
+      setCurrentQuestion((prev) => prev + 1);
+    } else {
+      setIsLoaded(false);
+      // validate the user responses
+      // make a post request
+      // return results
+    }
+  };
+
   if (!isLoaded) return <Loading />;
+  if (isLoaded && errors.length) return <DisplayErrors errors={errors} />;
 
   return (
     <div className="survey-container">
@@ -34,11 +57,11 @@ export default function DiagnosticScreener() {
         {surveyFullName} ({surveyDisplayName})
       </h1>
       <h2 className="survey-prompt">{surveyPrompt}</h2>
-      <div className="survey-question">{questions[currentQuestion].title}</div>
+      <div className="survey-question">{questions[currentQuestion]?.title}</div>
       <div className="survey-answers">
         {answers.map((answer, i) => {
           return (
-            <div key={i} className="survey-answer">
+            <div onClick={handleClick} key={i} className="survey-answer">
               {answer.title}
             </div>
           );
@@ -52,7 +75,11 @@ export default function DiagnosticScreener() {
           ></div>
         </div>
         <div>
-          Question {currentQuestion + 1} out of {questions.length}
+          Question{" "}
+          {currentQuestion < questions.length
+            ? currentQuestion + 1
+            : questions.length}{" "}
+          out of {questions.length}
         </div>
       </div>
     </div>
