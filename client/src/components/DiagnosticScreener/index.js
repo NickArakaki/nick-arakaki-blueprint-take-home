@@ -11,8 +11,8 @@ export default function DiagnosticScreener() {
   const [surveyDisplayName, setSurveyDisplayName] = useState("");
   const [surveyFullName, setSurveyFullName] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [userResponses, setUserResponses] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [userResponses, setUserResponses] = useState([{}]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
@@ -38,14 +38,35 @@ export default function DiagnosticScreener() {
       });
   }, []);
 
+  useEffect(() => {
+    if (userResponses.length === questions.length && isLoaded) {
+      console.log(userResponses);
+      fetch("/api/survey/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers: userResponses }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error("Something went wrong");
+          }
+        })
+        .then((data) => console.log(data))
+        .catch((error) => setErrors([error.message]));
+      setHasSubmitted(true);
+    }
+  }, [userResponses]);
+
   const handleClick = (e) => {
     if (currentQuestion < questions.length) {
+      const response = {
+        value: 4,
+        question_id: questions[currentQuestion].question_id,
+      };
+      setUserResponses([...userResponses, response]);
       setCurrentQuestion((prev) => prev + 1);
-    } else {
-      // validate the user responses
-      // make a post request
-      setHasSubmitted(true);
-      // return results
     }
   };
 
