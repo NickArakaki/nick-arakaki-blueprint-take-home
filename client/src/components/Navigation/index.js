@@ -5,12 +5,7 @@ import "./Navigation.css";
 export default function Navigation() {
   return (
     <nav>
-      <div>
-        <NavLink to="/">Blueprint Take Home Challenge</NavLink>
-      </div>
-      <div>
-        <NavLink to="/diagnostic-screener">Diagnostic Screener</NavLink>
-      </div>
+      <NavLink to="/">Blueprint Take Home Challenge</NavLink>
     </nav>
   );
 }
