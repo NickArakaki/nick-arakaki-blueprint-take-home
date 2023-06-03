@@ -14,6 +14,8 @@ Front-End: React
 
 Back-End: Node, Express
 
+Testing: Jest, Postman
+
 ## Project Description
 
 There is a lot of repetitive work when gathering data from patients, and this project aims to aleviate some of the tedious work by automating the screening process for clinicians.
@@ -24,17 +26,20 @@ This project was designed to present users with a diagnostic screener fetched fr
 
 ### Part I
 
-When planning how I would develop the API, I often went back and forth trying to decide whether it was worth it to set up an ORM/ODM to store the minimal data. I decided that was overkill for the scope of this project, and instead decided to just store the survey, question/domain map, and the domain/level two test map as files the API can access when needed.
+When planning how I would develop the API, I went back and forth trying to decide whether it was worth it to set up a database to store the minimal data. I decided that was overkill for the scope of this project, and instead opted to store the survey, question/domain map, and the domain/level two test map as files the API can import as needed.
 
 While there are security risks associated with storing data as plain text, I did not see any real harm in this approach as I am not accessing any identifiable patient information, and instead simply returning the result of the survey.
 
 In a production application, however, I would definitely use a means of authenticting the user to ensure the data is being sent to the correct person. I would also consider using a relational or NoSQL database depending on the complexity of the data I want to store, and how I expect to use the data in the rest of my application. Since this data would almost certainly contain identifiable patient information, I would also use some sort of encryption to increace the security of the data.
 
-I chose to use Express as the API framework as it allows me to quickly and easily setup endpoints. I also like the use of middleware, as it allows me to dictate the flow of the request and channel it through the appropriate endpoints. Writing middleware that can be used with multiple endpoints allows me to keep my code DRY and organized. Some of the downsides to Express is because it's unopinionated, it lacks a lot of built-in security, requiring the use of external dependencies.
+I chose to use Express as the API framework as it allows me to quickly and easily setup endpoints, and the use of middlewareallows me to dictate the flow of the request and channel it through the appropriate endpoints. Writing middleware that can be used with multiple endpoints allows me to keep my code DRY and organized. One of the downsides to Express is because it's unopinionated, it lacks a lot of built-in security, requiring the use of external dependencies.
 
 Had I spent more time on this project, I would have liked have implemented some of the security dependencies, as well as write more robust tests for my validators and data processing middlewares.
 
 ### Part II
+
+- Built using React
+- If I spent more time, I would have focused more time on accessibility
 
 ## Deploying Locally
 
