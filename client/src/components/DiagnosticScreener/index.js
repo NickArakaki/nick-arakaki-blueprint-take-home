@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Loading from "../Loading";
 import DisplayErrors from "../DisplayErrors";
+import DiagnosticResults from "../DiagnosticResults";
 import "./DiagnosticScreener.css";
 
 export default function DiagnosticScreener() {
@@ -14,6 +15,7 @@ export default function DiagnosticScreener() {
   const [userResponses, setUserResponses] = useState([]);
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     fetch("/api/survey/")
@@ -38,6 +40,7 @@ export default function DiagnosticScreener() {
       });
   }, []);
 
+  // Automatically submit survey after last question is answered
   useEffect(() => {
     if (userResponses.length === questions.length && isLoaded) {
       console.log(userResponses);
@@ -53,7 +56,7 @@ export default function DiagnosticScreener() {
             throw new Error("Something went wrong");
           }
         })
-        .then((data) => console.log(data))
+        .then((data) => setResults(data))
         .catch((error) => setErrors([error.message]));
       setHasSubmitted(true);
     }
@@ -95,7 +98,7 @@ export default function DiagnosticScreener() {
           </div>
         </div>
       ) : (
-        <div>Results</div>
+        <DiagnosticResults results={results} />
       )}
       <div className="progress-bar">
         <div
