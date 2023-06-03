@@ -1,5 +1,13 @@
 # Blueprint Take Home Assessment
 
+## Table of Contents
+
+- [Technologies Used](#technologies-used)
+- [Project Description](#project-description)
+- [My Approach](#my-approach)
+- [Deploying Locally](#deploying-locally)
+- [API Routes](#api-routes)
+
 ## Technologies Used
 
 Front-End: React
@@ -106,8 +114,6 @@ npm start
 
 - This should automatically open your browser to [http://localhost:3000](http://localhost:3000)
 - \*\*NOTE: If you would like/need to run the frontend on a different port, create a .env file based on the .env.example file in the clinet directory
-
-## Part I: Building a Small API
 
 ## API Routes
 
