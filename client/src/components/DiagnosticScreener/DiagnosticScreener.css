@@ -1,1 +1,21 @@
 /* TODO: Styling for Diagnostic Screener Questionarie */
+.survey-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.progress-bar {
+    width: 80%;
+    height: 1rem;
+    background-color: transparent;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.progress-bar-fill {
+    height: 1rem;
+    background-color: aquamarine;
+    transition: width .2s ease-out;
+}
