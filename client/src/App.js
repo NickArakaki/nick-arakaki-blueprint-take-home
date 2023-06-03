@@ -1,16 +1,19 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import DiagnosticScreener from "./components/DiagnosticScreener";
+import Home from "./pages/Home";
+import DiagnosticScreener from "./pages/DiagnosticScreener";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <>
-      <Header />
+      <Navigation />
       <Routes>
-        <Route path="/" element={<h1>Hello From Home</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/diagnostic-screener" element={<DiagnosticScreener />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
