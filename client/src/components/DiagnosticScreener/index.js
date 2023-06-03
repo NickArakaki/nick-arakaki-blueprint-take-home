@@ -13,6 +13,7 @@ export default function DiagnosticScreener() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [errors, setErrors] = useState([]);
   const [userResponses, setUserResponses] = useState([{}]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     fetch("/api/survey/")
@@ -41,9 +42,9 @@ export default function DiagnosticScreener() {
     if (currentQuestion < questions.length) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setIsLoaded(false);
       // validate the user responses
       // make a post request
+      setHasSubmitted(true);
       // return results
     }
   };
@@ -57,30 +58,36 @@ export default function DiagnosticScreener() {
         {surveyFullName} ({surveyDisplayName})
       </h1>
       <h2 className="survey-prompt">{surveyPrompt}</h2>
-      <div className="survey-question">{questions[currentQuestion]?.title}</div>
-      <div className="survey-answers">
-        {answers.map((answer, i) => {
-          return (
-            <div onClick={handleClick} key={i} className="survey-answer">
-              {answer.title}
-            </div>
-          );
-        })}
+      {!hasSubmitted ? (
+        <div className="survey-question-container">
+          <div className="survey-question">
+            {questions[currentQuestion]?.title}
+          </div>
+          <div className="survey-answers">
+            {answers.map((answer, i) => {
+              return (
+                <div onClick={handleClick} key={i} className="survey-answer">
+                  {answer.title}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div>Results</div>
+      )}
+      <div className="progress-bar">
+        <div
+          className="progress-bar-fill"
+          style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
+        ></div>
       </div>
       <div>
-        <div className="progress-bar">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
-          ></div>
-        </div>
-        <div>
-          Question{" "}
-          {currentQuestion < questions.length
-            ? currentQuestion + 1
-            : questions.length}{" "}
-          out of {questions.length}
-        </div>
+        Question{" "}
+        {currentQuestion < questions.length
+          ? currentQuestion + 1
+          : questions.length}{" "}
+        out of {questions.length}
       </div>
     </div>
   );
