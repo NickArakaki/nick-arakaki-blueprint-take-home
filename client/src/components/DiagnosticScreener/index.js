@@ -74,50 +74,45 @@ export default function DiagnosticScreener() {
 
   if (!isLoaded) return <Loading />;
   if (isLoaded && errors.length) return <DisplayErrors errors={errors} />;
+  if (hasSubmitted) return <DiagnosticResults results={results} />;
 
   return (
     <div className="survey-container">
-      {!hasSubmitted ? (
-        <>
-          <h1 className="survey-name">
-            {surveyFullName} ({surveyDisplayName})
-          </h1>
-          <h2 className="survey-prompt">{surveyPrompt}</h2>
-          <div className="survey-question-container">
-            <div className="survey-question">
-              {questions[currentQuestion]?.title}
-            </div>
-            <div className="survey-answers">
-              {answers.map((answer, i) => (
-                <div
-                  key={i}
-                  className="survey-answer"
-                  onClick={(e) => handleClick(e, i)}
-                >
-                  {answer.title}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="progress-bar">
+      <h1 className="survey-name">
+        {surveyFullName} ({surveyDisplayName})
+      </h1>
+      <h2 className="survey-prompt">{surveyPrompt}</h2>
+      <div className="survey-question-container">
+        <div className="survey-question">
+          {questions[currentQuestion]?.title}
+        </div>
+        <div className="survey-answers">
+          {answers.map((answer, i) => (
             <div
-              className="progress-bar-fill"
-              style={{
-                width: `${(currentQuestion / questions.length) * 100}%`,
-              }}
-            ></div>
-          </div>
-          <div>
-            Question{" "}
-            {currentQuestion < questions.length
-              ? currentQuestion + 1
-              : questions.length}{" "}
-            out of {questions.length}
-          </div>
-        </>
-      ) : (
-        <DiagnosticResults results={results} />
-      )}
+              key={i}
+              className="survey-answer"
+              onClick={(e) => handleClick(e, i)}
+            >
+              {answer.title}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="progress-bar">
+        <div
+          className="progress-bar-fill"
+          style={{
+            width: `${(currentQuestion / questions.length) * 100}%`,
+          }}
+        ></div>
+      </div>
+      <div>
+        Question{" "}
+        {currentQuestion < questions.length
+          ? currentQuestion + 1
+          : questions.length}{" "}
+        out of {questions.length}
+      </div>
     </div>
   );
 }
