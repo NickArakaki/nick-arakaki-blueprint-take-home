@@ -36,7 +36,10 @@ const processDomainValues = (domainValues) => {
   const assessments = levelTwoAssessments;
 
   for (const [domain, value] of Object.entries(domainValues)) {
-    if (value >= 2) {
+    if (
+      (domain === "substance_use" && value >= 1) ||
+      (domain !== "substance_use" && value >= 2)
+    ) {
       res.add(assessments[domain]);
     }
   }
