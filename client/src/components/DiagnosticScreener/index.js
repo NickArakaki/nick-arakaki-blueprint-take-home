@@ -43,7 +43,6 @@ export default function DiagnosticScreener() {
   // Automatically submit survey after last question is answered
   useEffect(() => {
     if (userResponses.length === questions.length && isLoaded) {
-      console.log(userResponses);
       fetch("/api/survey/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,10 +61,10 @@ export default function DiagnosticScreener() {
     }
   }, [userResponses]);
 
-  const handleClick = (e) => {
+  const handleClick = (e, i) => {
     if (currentQuestion < questions.length) {
       const response = {
-        value: 4,
+        value: answers[i].value,
         question_id: questions[currentQuestion].question_id,
       };
       setUserResponses([...userResponses, response]);
@@ -88,13 +87,15 @@ export default function DiagnosticScreener() {
             {questions[currentQuestion]?.title}
           </div>
           <div className="survey-answers">
-            {answers.map((answer, i) => {
-              return (
-                <div onClick={handleClick} key={i} className="survey-answer">
-                  {answer.title}
-                </div>
-              );
-            })}
+            {answers.map((answer, i) => (
+              <div
+                key={i}
+                className="survey-answer"
+                onClick={(e) => handleClick(e, i)}
+              >
+                {answer.title}
+              </div>
+            ))}
           </div>
         </div>
       ) : (

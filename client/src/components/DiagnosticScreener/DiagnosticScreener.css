@@ -2,17 +2,31 @@
 .survey-container {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 3rem;
+    padding: 2rem;
+}
+
+.survey-answers {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin: 1rem 0;
 }
 
 .survey-answer {
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 10px;
     padding: .25rem;
-    margin: .25rem;
     text-align: center;
     cursor: pointer;
+}
+
+.survey-answer:hover {
+    background-color: aquamarine;
 }
 
 .progress-bar {

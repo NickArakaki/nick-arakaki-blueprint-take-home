@@ -1,1 +1,13 @@
 /* TODO: Add sytling for diagnostic results */
+.diagnostic-results-container > a {
+    border: 1px solid grey;
+    padding: .25rem;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.diagnostic-results {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
