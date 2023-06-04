@@ -234,6 +234,20 @@ describe("Integration of Process Requests with Process Domain Values", () => {
     expect(processDomainValues(processedResponses)).toEqual(["ASSIST"]);
   });
 
+  test("should equal []", () => {
+    const processedResponses = processSurveyResponses([
+      { question_id: "question_a", value: 1 },
+      { question_id: "question_b", value: 0 },
+      { question_id: "question_c", value: 1 },
+      { question_id: "question_d", value: 0 },
+      { question_id: "question_e", value: 1 },
+      { question_id: "question_f", value: 0 },
+      { question_id: "question_g", value: 0 },
+      { question_id: "question_h", value: 1 },
+    ]);
+    expect(processDomainValues(processedResponses)).toEqual(["ASSIST"]);
+  });
+
   test("should equal ['PHQ-9']", () => {
     const processedResponses = processSurveyResponses([
       { question_id: "question_a", value: 1 },
