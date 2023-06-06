@@ -51,8 +51,12 @@ export default function DiagnosticScreener() {
         .then((res) => {
           if (res.ok) {
             return res.json();
+          } else if (res.status < 500) {
+            throw new Error(
+              "There was an issue processing your responses, please retake the survey"
+            );
           } else {
-            throw new Error("Something went wrong");
+            throw new Error("Something went wrong, please try again later");
           }
         })
         .then((data) => setResults(data))
@@ -82,21 +86,24 @@ export default function DiagnosticScreener() {
         {surveyFullName} ({surveyDisplayName})
       </h1>
       <h2 className="survey-prompt">{surveyPrompt}</h2>
-      <div className="survey-question-container">
-        <div className="survey-question">
-          {questions[currentQuestion]?.title}
-        </div>
-        <div className="survey-answers">
-          {answers.map((answer, i) => (
-            <div
-              key={i}
-              className="survey-answer"
-              onClick={(e) => handleClick(e, i)}
-            >
-              {answer.title}
-            </div>
-          ))}
-        </div>
+      <div className="survey-question">{questions[currentQuestion]?.title}</div>
+      <div className="survey-answers">
+        {answers.map((answer, i) => (
+          <button
+            key={i}
+            className="survey-answer"
+            onClick={(e) => handleClick(e, i)}
+          >
+            {answer.title}
+          </button>
+        ))}
+      </div>
+      <div className="survey-current-question">
+        Question{" "}
+        {currentQuestion < questions.length
+          ? currentQuestion + 1
+          : questions.length}{" "}
+        out of {questions.length}
       </div>
       <div className="progress-bar">
         <div
@@ -105,13 +112,6 @@ export default function DiagnosticScreener() {
             width: `${(currentQuestion / questions.length) * 100}%`,
           }}
         ></div>
-      </div>
-      <div>
-        Question{" "}
-        {currentQuestion < questions.length
-          ? currentQuestion + 1
-          : questions.length}{" "}
-        out of {questions.length}
       </div>
     </div>
   );
