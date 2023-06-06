@@ -1,3 +1,9 @@
+import { useEffect } from "react";
+
 export default function NotFound() {
-  return <div>404 Not FOund</div>;
+  useEffect(() => {
+    document.title = "Not Found";
+  }, []);
+
+  return <div className="main-content">404 Not Found</div>;
 }
