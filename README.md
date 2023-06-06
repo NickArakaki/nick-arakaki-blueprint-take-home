@@ -1,5 +1,7 @@
 # Blueprint Take Home Assessment
 
+![blueprint gif](https://github.com/NickArakaki/nick-arakaki-bluepoint-take-home/assets/115119760/69c33b50-ae58-410e-971f-5ef533b21f3c)
+
 ## Live Link
 
 \*\*\*\*NOTE: This is hosted on a free service, as such it may take a few minutes to load
