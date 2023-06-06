@@ -1,11 +1,10 @@
 const express = require("express");
 const routes = require("./routes");
-require("dotenv").config();
 
-const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+
 app.use(routes);
 
 // 404 Catch
@@ -28,4 +27,4 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+module.exports = app;
