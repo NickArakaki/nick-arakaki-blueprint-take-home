@@ -4,7 +4,7 @@
 
 \*\*\*\*NOTE: This is hosted on a free service, as such it may take a few minutes to load
 
-https://bluepoint-test.onrender.com/
+https://nick-arakaki-blueprint-take-home.onrender.com
 
 ## Developer
 
