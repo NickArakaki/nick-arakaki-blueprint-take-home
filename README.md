@@ -54,7 +54,7 @@ In a production application, however, I would consider using a relational or NoS
 
 I chose to use Express as the API framework as it allows me to quickly and easily setup endpoints, and through the use of middleware functions I can process the incoming requests in an organized manner. One of the downsides to Express, however, is that it's unopinionated and lacks a lot of built-in security, requiring the use of external dependencies and custom middleware to control the flow of data.
 
-Had I spent more time on this project I would have implemented some of the security dependencies, as well as write more robust tests for my validators and data processing middlewares.
+Had I spent more time on this project I would have implemented some of the security dependencies to protect against common attacks like CSRF and XSS attacks, as well as write more robust tests for my validators and data processing middlewares.
 
 ### Part II: Frontend
 
