@@ -1,7 +1,18 @@
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 2rem;
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 255, 0.735);
+}
+
+nav > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 1.5em;
+}
+
+.blueprint-logo {
+    height: 50%;
 }
