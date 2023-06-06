@@ -1,6 +1,6 @@
 # Blueprint Take Home Assessment
 
-![blueprint gif](https://github.com/NickArakaki/nick-arakaki-bluepoint-take-home/assets/115119760/69c33b50-ae58-410e-971f-5ef533b21f3c)
+![blueprint gif](https://github.com/NickArakaki/nick-arakaki-blueprint-take-home/assets/115119760/6bb86fcf-27f3-4669-a904-2e9de97a0511)
 
 ## Live Link
 
